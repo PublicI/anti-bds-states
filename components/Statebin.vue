@@ -1,13 +1,13 @@
 <template>
     <div class="statebinContainer" style="position: relative;">
-        <svg style="width:100%;height:60px;position: absolute; top: -19px; left: -12px">
+        <svg style="width:100%;height:60px;position: absolute; top: 0px; left: -12px">
             <g class="legendLinear" transform="translate(20,20)">
             </g>
         </svg>
 
         <div class="statebins">
-            <div :style="(bin.color == '#ffffd4' ? 'color:rgb(210,210,210);' : '') + 'top:' + bin.y + 'px;left:' + bin.x + 'px;background-color:' + bin.color" class="statebin" v-for="bin in bins" v-bind:key="bin.abbr"> <!--  v-tooltip="{ content: '<b>' + bin.name + '</b><br>' + bin.formattedRecoveries + ' recoveries' }" -->
-                <a :href="bin.link" v-if="bin.link">{{bin.abbrev}}</a>
+            <div :style="(bin.color == '#ffffd4' ? 'color:rgb(210,210,210);' : '') + 'top:' + bin.y + 'px;left:' + bin.x + 'px;background-color:' + bin.color + ';width:' + (boxSize-2) + 'px;height:' + (boxSize-2) + 'px'" class="statebin" v-for="bin in bins" v-bind:key="bin.abbr"> <!--  v-tooltip="{ content: '<b>' + bin.name + '</b><br>' + bin.formattedRecoveries + ' recoveries' }" -->
+                <a :href="bin.link" v-if="bin.link" target="_top">{{bin.abbrev}}</a>
                 <span v-if="!bin.link">{{bin.abbrev}}</span>
             </div>
         </div>
@@ -29,6 +29,7 @@ export default {
     },
     data() {
         return {
+            boxSize: 26,
             grid: [
                 '                                  ME',
                 '                   WI          VT NH',
@@ -46,7 +47,8 @@ export default {
 
         vm.$nextTick(() => {
             let legendLinear = legendColor()
-                .shapeWidth(20)
+                .shapeWidth(24)
+                .shapeHeight(24)
                 // .labels(['Allowed','Banned','Banned in House','Debating','None',''])
                 // .labelAlign('end')
                 // .orient('horizontal')
@@ -55,6 +57,24 @@ export default {
 
             d3.select(vm.$el).select('.legendLinear').call(legendLinear);
         });
+
+        if (typeof window !== 'undefined') {
+            if (vm.$el.offsetWidth >= 400) {
+                vm.boxSize = 36;
+            }
+            else {
+                vm.boxSize = 26;
+            }
+
+            window.addEventListener('resize',() => {
+                if (vm.$el.offsetWidth >= 400) {
+                    vm.boxSize = 36;
+                }
+                else {
+                    vm.boxSize = 26;
+                }
+            });
+        }
     },
     methods: {
         scale() {
@@ -80,7 +100,7 @@ export default {
             let binsRef = {};
             let bins = [];
 
-            let boxSize = 36;
+            let boxSize = this.boxSize;
 
             let re = /\w+/g;
 
@@ -123,19 +143,17 @@ export default {
     position: relative;
     width: 300px;
     height: 220px;
-    margin-top:15px;
+    // margin-top:15px;
 }
 
 .statebin {
     position: absolute;
-    width: 34px;
-    height: 34px;
     background-color: #eee;
     color: rgb(140,140,140);
     text-align: center;
-    font-size: 16px;
+    font-size: 12px;
+    padding-top: 3px;
     line-height: 20px;
-    padding-top: 6px;
     // color: #04284b;
     font-family: MaisonNeue,Arial,Helvetica,Verdana,sans-serif;
     font-weight: 400;
@@ -283,5 +301,19 @@ export default {
     line-height: 16px;
     */
     fill: rgb(100, 100, 100);
+}
+
+@media only screen and (min-width: 400px) {
+    .statebin {
+        font-size: 16px;
+        padding-top: 6px;
+    }
+
+    .statebins {
+        position: relative;
+        width: 420px;
+        height: 350px;
+        // margin-top:15px;
+    }
 }
 </style>
