@@ -167,8 +167,8 @@ export default {
     font-weight: 400;
     letter-spacing: .3px;
     line-height: 1.5;
-    // text-decoration: none;
-    // background-image: none;
+    text-decoration: none;
+    background-image: none;
 }
 
 .tooltip {
