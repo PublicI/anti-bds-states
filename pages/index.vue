@@ -2,7 +2,7 @@
     <div class="basic-text">
         <!--<p class="chatter">The Center for Public Integrity reached out to all 50 states to ask if candidates running for state office may accept cryptocurrency. In total, {{responded.length-1}} states and D.C. responded.</p>-->
 
-        <h4 style="padding-top: 0;margin-top: 0;margin-bottom: 0;font-size: 30px">{{apnumber(passed.length)}} states enacted measures discouraging boycotts of Israel</h4>
+        <h4>{{apnumber(passed.length)}} states enacted measures discouraging boycotts of Israel</h4>
         <statebin :rows="passed" :labels="['Enacted']" :colors="['#f5e205']" />
     </div>
 </template>
@@ -41,6 +41,10 @@ h4 {
     max-width: 400px;
     line-height: 115%;
     padding-left: 8px;
+    margin-bottom: 2px;
+    font-size: 27px;
+    padding-top: 0;
+    margin-top: 0;
 }
 .chatter {
     max-width: 400px;
