@@ -23,6 +23,11 @@ module.exports = {
                 rel: 'icon',
                 type: 'image/png',
                 href: `/${pkg.name}/favicon.png`
+            },
+            {
+                rel: 'stylesheet',
+                href: 'https://propublica.github.io/stateface/reference/stateface.css',
+                type: 'text/css'
             }
         ]
     },

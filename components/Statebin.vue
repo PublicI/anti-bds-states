@@ -6,9 +6,10 @@
         </svg>
 
         <div class="statebins">
-            <div :style="(bin.color == '#ffffd4' ? 'color:rgb(210,210,210);' : '') + 'top:' + bin.y + 'px;left:' + bin.x + 'px;background-color:' + bin.color + ';width:' + (boxSize-2) + 'px;height:' + (boxSize-2) + 'px'" class="statebin" v-for="bin in bins" v-bind:key="bin.abbr"> <!--  v-tooltip="{ content: '<b>' + bin.name + '</b><br>' + bin.formattedRecoveries + ' recoveries' }" -->
-                <a :href="bin.link" v-if="bin.link" target="_top">{{bin.abbrev}}</a>
-                <span v-if="!bin.link">{{bin.abbrev}}</span>
+            <div :style="(bin.color == '#ffffd4' ? 'color:rgb(210,210,210);' : '') + 'top:' + bin.y + 'px;left:' + bin.x + 'px;background-color:' + bin.color + ';width:' + (boxSize-2) + 'px;height:' + (boxSize-2) + 'px'" :class="'statebin stateface-' + bin.abbrev.toLowerCase() " v-for="bin in bins" v-bind:key="bin.abbr"> <!--  v-tooltip="{ content: '<b>' + bin.name + '</b><br>' + bin.formattedRecoveries + ' recoveries' }" -->
+                <!-- <a :href="bin.link" v-if="bin.link" target="_top">{{bin.abbrev}}</a> -->
+                <!-- <span v-if="!bin.link">{{bin.abbrev}}</span> -->
+
             </div>
         </div>
 
@@ -139,6 +140,8 @@ export default {
 </script>
 
 <style lang="less">
+@font-face{font-family:statefaceregular;src:url(~static/fonts/stateface-regular-webfont.eot);src:url(~static/fonts/stateface-regular-webfont.eot?#iefix) format('embedded-opentype'),url(~static/fonts/stateface-regular-webfont.woff) format('woff'),url(~static/fonts/stateface-regular-webfont.ttf) format('truetype'),url(~static/fonts/stateface-regular-webfont.svg#StateFaceRegular) format('svg');font-weight:400;font-style:normal}
+
 .statebins {
     position: relative;
     width: 300px;
@@ -155,7 +158,7 @@ export default {
     padding-top: 3px;
     line-height: 20px;
     // color: #04284b;
-    font-family: MaisonNeue,Arial,Helvetica,Verdana,sans-serif;
+    font-family: StateFaceRegular,MaisonNeue,Arial,Helvetica,Verdana,sans-serif;
     font-weight: 400;
     letter-spacing: .3px;
     line-height: 1.5;
