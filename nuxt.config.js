@@ -23,6 +23,11 @@ module.exports = {
                 rel: 'icon',
                 type: 'image/png',
                 href: `/${pkg.name}/favicon.png`
+            },
+            {
+                rel: 'alternate',
+                type: 'application/json+oembed',
+                href: `https://apps.publicintegrity.org/${pkg.name}/oembed.json`
             }
         ]
     },
